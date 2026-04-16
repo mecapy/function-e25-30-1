@@ -1,0 +1,102 @@
+{
+  "handler": "handler:F0_min",
+  "description": "Tests pour la précharge minimale F0^min (Section 5.2.3)",
+  "test_cases": [
+    {
+      "name": "cas_avec_charges_axiale_et_transversale",
+      "description": "Calcul avec forces axiale et transversale",
+      "request": {
+        "vis": {
+          "d": 10,
+          "p": 1.5,
+          "As": 58,
+          "Re_min": 940,
+          "quality_class": "10.9"
+        },
+        "assemblage": {
+          "dh": 11,
+          "do": 14.63,
+          "Rc": 400,
+          "mu_p_min": 0.15
+        },
+        "sollicitations": {
+          "FA_max": 5000,
+          "Ft_max": 2000
+        },
+        "serrage": {
+          "mu_tot_min": 0.12,
+          "mu_tot_max": 0.18,
+          "precision_class": "C20"
+        }
+      },
+      "expected": 18333.333333,
+      "tolerance": {
+        "numeric": 0.1
+      }
+    },
+    {
+      "name": "cas_charge_axiale_seule",
+      "description": "Calcul avec force axiale uniquement",
+      "request": {
+        "vis": {
+          "d": 12,
+          "p": 1.75,
+          "As": 84.3,
+          "Re_min": 640,
+          "quality_class": "8.8"
+        },
+        "assemblage": {
+          "dh": 13,
+          "do": 18.67,
+          "Rc": 350,
+          "mu_p_min": 0.15
+        },
+        "sollicitations": {
+          "FA_max": 10000,
+          "Ft_max": 0
+        },
+        "serrage": {
+          "mu_tot_min": 0.10,
+          "mu_tot_max": 0.16,
+          "precision_class": "C15"
+        }
+      },
+      "expected": 10000.0,
+      "tolerance": {
+        "numeric": 0.1
+      }
+    },
+    {
+      "name": "cas_charge_transversale_seule",
+      "description": "Calcul avec force transversale uniquement",
+      "request": {
+        "vis": {
+          "d": 10,
+          "p": 1.5,
+          "As": 58,
+          "Re_min": 940,
+          "quality_class": "10.9"
+        },
+        "assemblage": {
+          "dh": 11,
+          "do": 14.63,
+          "Rc": 400,
+          "mu_p_min": 0.20
+        },
+        "sollicitations": {
+          "FA_max": 0,
+          "Ft_max": 3000
+        },
+        "serrage": {
+          "mu_tot_min": 0.12,
+          "mu_tot_max": 0.18,
+          "precision_class": "C20"
+        }
+      },
+      "expected": 15000.0,
+      "tolerance": {
+        "numeric": 0.1
+      }
+    }
+  ]
+}

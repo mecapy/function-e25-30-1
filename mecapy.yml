@@ -1,0 +1,68 @@
+# MecaPy Package Manifest - NF E25-030-1
+# Pre-loaded bolted joints - Simplified approach
+
+name: e25-030-1
+description: Calculations for pre-loaded bolted joints per NF E25-030-1 (Simplified approach)
+author: MecaPy Team
+license: Copyright MecaPy
+version: 1.0.0
+
+tags:
+  - assemblage-visse
+  - precontrainte
+  - norme-francaise
+  - NF-E25-030-1
+  - mecanique
+  - boulonnerie
+
+# Exposed functions
+functions:
+  # Main function - Full verification
+  check:
+    handler: handler.check
+    description: Full verification of a bolted joint per NF E25-030-1 (all checks)
+
+  # Preload calculations (Sections 5.2.3 and 5.2.4)
+  min_preload:
+    handler: handler.F0_min
+    description: Minimum required preload F0^min (Section 5.2.3)
+
+  max_preload:
+    handler: handler.F0_max
+    description: Maximum allowable preload F0^max (Section 5.2.4)
+
+  # Tightening torques (Annex C)
+  tightening_torques:
+    handler: handler.tightening_torques
+    description: Tightening torques (nominal, min, max) per Annex C
+
+  # Verifications (Sections 5.2.5 and 5.2.6)
+  check_preload:
+    handler: handler.check_preload
+    description: Verification of criterion F0^min <= F0^max (Section 5.2.5)
+
+  check_bearing:
+    handler: handler.check_bearing
+    description: Verification of no bearing failure under head/nut (Section 5.2.6)
+
+  # Stress calculations (Annex A)
+  bolt_stresses:
+    handler: handler.bolt_stresses
+    description: Bolt stresses (tension, torsion, Von Mises) per Annex A
+
+# Normative reference
+norme:
+  reference: NF E25-030-1
+  titre: Bolted assemblies with ISO metric threading - Design rules for pre-loaded assemblies - Simplified approach
+  date: August 2014
+  organisme: AFNOR
+
+# Runtime configuration
+runtime:
+  python: "3.12"
+  timeout: 300
+
+# Tests
+tests:
+  framework: pytest
+  min_coverage: 80

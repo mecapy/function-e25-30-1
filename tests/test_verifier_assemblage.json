@@ -1,0 +1,149 @@
+{
+  "handler": "handler:check",
+  "description": "Tests pour la vérification complète d'assemblage selon NF E25-030-1",
+  "test_cases": [
+    {
+      "name": "cas_nominal_M10_classe_10.9",
+      "description": "Vis M10 classe 10.9 avec charges axiales et transversales",
+      "request": {
+        "vis": {
+          "d": 10,
+          "p": 1.5,
+          "As": 58,
+          "Re_min": 940,
+          "quality_class": "10.9"
+        },
+        "assemblage": {
+          "dh": 11,
+          "do": 14.63,
+          "Rc": 400,
+          "mu_p_min": 0.15
+        },
+        "sollicitations": {
+          "FA_max": 5000,
+          "Ft_max": 2000
+        },
+        "serrage": {
+          "mu_tot_min": 0.12,
+          "mu_tot_max": 0.18,
+          "precision_class": "C20"
+        }
+      },
+      "expected": {
+        "valid": false,
+        "preload": {
+          "valid": true,
+          "F0_min": 18333.3,
+          "F0_max": 33814.7,
+          "margin": 15481.4
+        },
+        "bearing": {
+          "valid": false,
+          "sigma_p_max": 462.8,
+          "Rc": 400,
+          "margin": -62.8
+        },
+        "stresses": {
+          "valid": true,
+          "sigma_b_max": 583.0,
+          "sigma_adm": 846.0
+        }
+      },
+      "tolerance": {
+        "numeric": 0.1
+      }
+    },
+    {
+      "name": "cas_charge_axiale_seule_M12",
+      "description": "Vis M12 classe 8.8 avec charge axiale uniquement",
+      "request": {
+        "vis": {
+          "d": 12,
+          "p": 1.75,
+          "As": 84.3,
+          "Re_min": 640,
+          "quality_class": "8.8"
+        },
+        "assemblage": {
+          "dh": 13,
+          "do": 18.67,
+          "Rc": 350,
+          "mu_p_min": 0.15
+        },
+        "sollicitations": {
+          "FA_max": 8000,
+          "Ft_max": 0
+        },
+        "serrage": {
+          "mu_tot_min": 0.10,
+          "mu_tot_max": 0.16,
+          "precision_class": "C15"
+        }
+      },
+      "expected": {
+        "valid": true,
+        "preload": {
+          "valid": true,
+          "F0_min": 8000.0,
+          "F0_max": 36060.1,
+          "margin": 28060.1
+        },
+        "bearing": {
+          "valid": true
+        },
+        "stresses": {
+          "valid": true
+        }
+      },
+      "tolerance": {
+        "numeric": 0.1
+      }
+    },
+    {
+      "name": "cas_sans_charge_M8",
+      "description": "Vis M8 classe 8.8 sans charge extérieure",
+      "request": {
+        "vis": {
+          "d": 8,
+          "p": 1.25,
+          "As": 36.6,
+          "Re_min": 640,
+          "quality_class": "8.8"
+        },
+        "assemblage": {
+          "dh": 9,
+          "do": 12.73,
+          "Rc": 400,
+          "mu_p_min": 0.15
+        },
+        "sollicitations": {
+          "FA_max": 0,
+          "Ft_max": 0
+        },
+        "serrage": {
+          "mu_tot_min": 0.12,
+          "mu_tot_max": 0.18,
+          "precision_class": "C20"
+        }
+      },
+      "expected": {
+        "valid": true,
+        "preload": {
+          "valid": true,
+          "F0_min": 0.0,
+          "F0_max": 13955.5,
+          "margin": 13955.5
+        },
+        "bearing": {
+          "valid": true
+        },
+        "stresses": {
+          "valid": true
+        }
+      },
+      "tolerance": {
+        "numeric": 0.1
+      }
+    }
+  ]
+}

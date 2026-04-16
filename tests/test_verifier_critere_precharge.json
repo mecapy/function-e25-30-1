@@ -1,0 +1,117 @@
+{
+  "handler": "handler:check_preload",
+  "description": "Tests pour la vérification du critère F0^min ≤ F0^max (Section 5.2.5)",
+  "test_cases": [
+    {
+      "name": "cas_valide_avec_marge",
+      "description": "Assemblage valide avec bonne marge de sécurité",
+      "request": {
+        "vis": {
+          "d": 10,
+          "p": 1.5,
+          "As": 58,
+          "Re_min": 940,
+          "quality_class": "10.9"
+        },
+        "assemblage": {
+          "dh": 11,
+          "do": 14.63,
+          "Rc": 400,
+          "mu_p_min": 0.15
+        },
+        "sollicitations": {
+          "FA_max": 5000,
+          "Ft_max": 2000
+        },
+        "serrage": {
+          "mu_tot_min": 0.12,
+          "mu_tot_max": 0.18,
+          "precision_class": "C20"
+        }
+      },
+      "expected": {
+        "valid": true,
+        "F0_min": 18333.3,
+        "F0_max": 33814.7,
+        "margin": 15481.4
+      },
+      "tolerance": {
+        "numeric": 0.2
+      }
+    },
+    {
+      "name": "cas_limite_faible_marge",
+      "description": "Assemblage à la limite avec faible marge",
+      "request": {
+        "vis": {
+          "d": 8,
+          "p": 1.25,
+          "As": 36.6,
+          "Re_min": 640,
+          "quality_class": "8.8"
+        },
+        "assemblage": {
+          "dh": 9,
+          "do": 12.73,
+          "Rc": 300,
+          "mu_p_min": 0.15
+        },
+        "sollicitations": {
+          "FA_max": 6000,
+          "Ft_max": 2500
+        },
+        "serrage": {
+          "mu_tot_min": 0.12,
+          "mu_tot_max": 0.18,
+          "precision_class": "C20"
+        }
+      },
+      "expected": {
+        "valid": false,
+        "F0_min": 22666.7,
+        "F0_max": 13955.5,
+        "margin": -8711.2
+      },
+      "tolerance": {
+        "numeric": 0.2
+      }
+    },
+    {
+      "name": "cas_invalide_charges_excessives",
+      "description": "Assemblage non valide - charges trop élevées",
+      "request": {
+        "vis": {
+          "d": 6,
+          "p": 1.0,
+          "As": 20.1,
+          "Re_min": 640,
+          "quality_class": "8.8"
+        },
+        "assemblage": {
+          "dh": 6.6,
+          "do": 10.0,
+          "Rc": 300,
+          "mu_p_min": 0.15
+        },
+        "sollicitations": {
+          "FA_max": 8000,
+          "Ft_max": 3000
+        },
+        "serrage": {
+          "mu_tot_min": 0.12,
+          "mu_tot_max": 0.18,
+          "precision_class": "C20"
+        }
+      },
+      "expected": {
+        "valid": false,
+        "F0_min": 28000.0,
+        "F0_max": 7326.1,
+        "margin": -20673.9
+      },
+      "tolerance": {
+        "numeric": 0.2
+      }
+    }
+  ]
+}

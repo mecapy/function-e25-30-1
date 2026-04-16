@@ -1,0 +1,162 @@
+{
+  "handler": "handler:bolt_stresses",
+  "description": "Tests pour les contraintes (traction, torsion, Von Mises) selon Annexe A",
+  "test_cases": [
+    {
+      "name": "cas_M10_classe_10.9_contraintes_completes",
+      "description": "Calcul complet des contraintes pour vis M10 classe 10.9",
+      "request": {
+        "vis": {
+          "d": 10,
+          "p": 1.5,
+          "As": 58,
+          "Re_min": 940,
+          "quality_class": "10.9"
+        },
+        "assemblage": {
+          "dh": 11,
+          "do": 14.63,
+          "Rc": 400,
+          "mu_p_min": 0.15
+        },
+        "sollicitations": {
+          "FA_max": 5000,
+          "Ft_max": 2000
+        },
+        "serrage": {
+          "mu_tot_min": 0.12,
+          "mu_tot_max": 0.18,
+          "precision_class": "C20"
+        }
+      },
+      "expected": {
+        "valid": true,
+        "sigma_b_max": 583.0,
+        "tau_b_max": 234.4,
+        "sigma_b_eq": 710.5,
+        "sigma_adm": 846.0,
+        "margin": 135.5
+      },
+      "tolerance": {
+        "numeric": 10.0
+      }
+    },
+    {
+      "name": "cas_M12_classe_8.8_faible_coefficient",
+      "description": "Vis M12 avec faible coefficient de frottement",
+      "request": {
+        "vis": {
+          "d": 12,
+          "p": 1.75,
+          "As": 84.3,
+          "Re_min": 640,
+          "quality_class": "8.8"
+        },
+        "assemblage": {
+          "dh": 13,
+          "do": 18.67,
+          "Rc": 350,
+          "mu_p_min": 0.15
+        },
+        "sollicitations": {
+          "FA_max": 8000,
+          "Ft_max": 0
+        },
+        "serrage": {
+          "mu_tot_min": 0.10,
+          "mu_tot_max": 0.16,
+          "precision_class": "C15"
+        }
+      },
+      "expected": {
+        "valid": true,
+        "sigma_b_max": 427.8,
+        "tau_b_max": 149.6,
+        "sigma_b_eq": 500.1,
+        "sigma_adm": 576.0,
+        "margin": 75.9
+      },
+      "tolerance": {
+        "numeric": 10.0
+      }
+    },
+    {
+      "name": "cas_M8_classe_12.9_haute_resistance",
+      "description": "Vis haute résistance M8 classe 12.9",
+      "request": {
+        "vis": {
+          "d": 8,
+          "p": 1.25,
+          "As": 36.6,
+          "Re_min": 1100,
+          "quality_class": "12.9"
+        },
+        "assemblage": {
+          "dh": 9,
+          "do": 12.73,
+          "Rc": 400,
+          "mu_p_min": 0.15
+        },
+        "sollicitations": {
+          "FA_max": 5000,
+          "Ft_max": 1500
+        },
+        "serrage": {
+          "mu_tot_min": 0.12,
+          "mu_tot_max": 0.18,
+          "precision_class": "C20"
+        }
+      },
+      "expected": {
+        "valid": true,
+        "sigma_b_max": 655.4,
+        "tau_b_max": 267.4,
+        "sigma_b_eq": 802.5,
+        "sigma_adm": 990.0,
+        "margin": 187.5
+      },
+      "tolerance": {
+        "numeric": 10.0
+      }
+    },
+    {
+      "name": "cas_contraintes_elevees",
+      "description": "Cas avec contraintes élevées proche de la limite",
+      "request": {
+        "vis": {
+          "d": 6,
+          "p": 1.0,
+          "As": 20.1,
+          "Re_min": 640,
+          "quality_class": "8.8"
+        },
+        "assemblage": {
+          "dh": 6.6,
+          "do": 10.0,
+          "Rc": 400,
+          "mu_p_min": 0.15
+        },
+        "sollicitations": {
+          "FA_max": 3000,
+          "Ft_max": 1000
+        },
+        "serrage": {
+          "mu_tot_min": 0.15,
+          "mu_tot_max": 0.25,
+          "precision_class": "C20"
+        }
+      },
+      "expected": {
+        "valid": true,
+        "sigma_b_max": 332.9,
+        "tau_b_max": 163.5,
+        "sigma_b_eq": 437.0,
+        "sigma_adm": 576.0,
+        "margin": 139.0
+      },
+      "tolerance": {
+        "numeric": 10.0
+      }
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "handler": "handler:tightening_torques",
+  "description": "Tests pour les couples de serrage (nominal, min, max) selon Annexe C",
+  "test_cases": [
+    {
+      "name": "cas_precision_C20_standard",
+      "description": "Calcul avec classe de précision C20 (clé dynamométrique standard)",
+      "request": {
+        "vis": {
+          "d": 10,
+          "p": 1.5,
+          "As": 58,
+          "Re_min": 940,
+          "quality_class": "10.9"
+        },
+        "assemblage": {
+          "dh": 11,
+          "do": 14.63,
+          "Rc": 400,
+          "mu_p_min": 0.15
+        },
+        "sollicitations": {
+          "FA_max": 5000,
+          "Ft_max": 2000
+        },
+        "serrage": {
+          "mu_tot_min": 0.12,
+          "mu_tot_max": 0.18,
+          "precision_class": "C20"
+        }
+      },
+      "expected": {
+        "T_nominal": 45.5,
+        "T_min": 36.4,
+        "T_max": 54.6
+      },
+      "tolerance": {
+        "numeric": 1.0
+      }
+    },
+    {
+      "name": "cas_precision_C10_haute_precision",
+      "description": "Calcul avec classe C10 (clé électronique haute précision)",
+      "request": {
+        "vis": {
+          "d": 12,
+          "p": 1.75,
+          "As": 84.3,
+          "Re_min": 640,
+          "quality_class": "8.8"
+        },
+        "assemblage": {
+          "dh": 13,
+          "do": 18.67,
+          "Rc": 350,
+          "mu_p_min": 0.15
+        },
+        "sollicitations": {
+          "FA_max": 8000,
+          "Ft_max": 0
+        },
+        "serrage": {
+          "mu_tot_min": 0.10,
+          "mu_tot_max": 0.16,
+          "precision_class": "C10"
+        }
+      },
+      "expected": {
+        "T_nominal": 55.6,
+        "T_min": 50.1,
+        "T_max": 61.2
+      },
+      "tolerance": {
+        "numeric": 2.0
+      }
+    },
+    {
+      "name": "cas_precision_C50_basse_precision",
+      "description": "Calcul avec classe C50 (clé standard sans contrôle)",
+      "request": {
+        "vis": {
+          "d": 8,
+          "p": 1.25,
+          "As": 36.6,
+          "Re_min": 640,
+          "quality_class": "8.8"
+        },
+        "assemblage": {
+          "dh": 9,
+          "do": 12.73,
+          "Rc": 400,
+          "mu_p_min": 0.15
+        },
+        "sollicitations": {
+          "FA_max": 2000,
+          "Ft_max": 500
+        },
+        "serrage": {
+          "mu_tot_min": 0.15,
+          "mu_tot_max": 0.25,
+          "precision_class": "C50"
+        }
+      },
+      "expected": {
+        "T_nominal": 14.2,
+        "T_min": 7.1,
+        "T_max": 21.2
+      },
+      "tolerance": {
+        "numeric": 1.0
+      }
+    }
+  ]
+}
