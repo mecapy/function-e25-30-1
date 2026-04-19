@@ -6,24 +6,24 @@
       "name": "cas_M10_classe_10.9",
       "description": "Vis M10 classe 10.9 avec coefficient de frottement standard",
       "request": {
-        "vis": {
+        "bolt": {
           "d": 10,
           "p": 1.5,
           "As": 58,
           "Re_min": 940,
           "quality_class": "10.9"
         },
-        "assemblage": {
+        "assembly": {
           "dh": 11,
           "do": 14.63,
           "Rc": 400,
           "mu_p_min": 0.15
         },
-        "sollicitations": {
+        "loads": {
           "FA_max": 5000,
           "Ft_max": 2000
         },
-        "serrage": {
+        "tightening": {
           "mu_tot_min": 0.12,
           "mu_tot_max": 0.18,
           "precision_class": "C20"
@@ -38,24 +38,24 @@
       "name": "cas_M12_classe_8.8",
       "description": "Vis M12 classe 8.8",
       "request": {
-        "vis": {
+        "bolt": {
           "d": 12,
           "p": 1.75,
           "As": 84.3,
           "Re_min": 640,
           "quality_class": "8.8"
         },
-        "assemblage": {
+        "assembly": {
           "dh": 13,
           "do": 18.67,
           "Rc": 350,
           "mu_p_min": 0.15
         },
-        "sollicitations": {
+        "loads": {
           "FA_max": 8000,
           "Ft_max": 0
         },
-        "serrage": {
+        "tightening": {
           "mu_tot_min": 0.10,
           "mu_tot_max": 0.16,
           "precision_class": "C15"
@@ -70,24 +70,24 @@
       "name": "cas_M8_classe_8.8_lubrifie",
       "description": "Vis M8 classe 8.8 avec lubrification (coefficient faible)",
       "request": {
-        "vis": {
+        "bolt": {
           "d": 8,
           "p": 1.25,
           "As": 36.6,
           "Re_min": 640,
           "quality_class": "8.8"
         },
-        "assemblage": {
+        "assembly": {
           "dh": 9,
           "do": 12.73,
           "Rc": 400,
           "mu_p_min": 0.15
         },
-        "sollicitations": {
+        "loads": {
           "FA_max": 3000,
           "Ft_max": 1000
         },
-        "serrage": {
+        "tightening": {
           "mu_tot_min": 0.08,
           "mu_tot_max": 0.12,
           "precision_class": "C10"

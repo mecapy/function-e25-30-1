@@ -6,24 +6,24 @@
       "name": "cas_valide_materiau_resistant",
       "description": "Pas de matage - matériau suffisamment résistant",
       "request": {
-        "vis": {
+        "bolt": {
           "d": 10,
           "p": 1.5,
           "As": 58,
           "Re_min": 940,
           "quality_class": "10.9"
         },
-        "assemblage": {
+        "assembly": {
           "dh": 11,
           "do": 14.63,
           "Rc": 400,
           "mu_p_min": 0.15
         },
-        "sollicitations": {
+        "loads": {
           "FA_max": 5000,
           "Ft_max": 2000
         },
-        "serrage": {
+        "tightening": {
           "mu_tot_min": 0.12,
           "mu_tot_max": 0.18,
           "precision_class": "C20"
@@ -43,24 +43,24 @@
       "name": "cas_limite_materiau_faible",
       "description": "À la limite - matériau peu résistant (aluminium)",
       "request": {
-        "vis": {
+        "bolt": {
           "d": 10,
           "p": 1.5,
           "As": 58,
           "Re_min": 940,
           "quality_class": "10.9"
         },
-        "assemblage": {
+        "assembly": {
           "dh": 11,
           "do": 14.63,
           "Rc": 250,
           "mu_p_min": 0.15
         },
-        "sollicitations": {
+        "loads": {
           "FA_max": 5000,
           "Ft_max": 2000
         },
-        "serrage": {
+        "tightening": {
           "mu_tot_min": 0.12,
           "mu_tot_max": 0.18,
           "precision_class": "C20"
@@ -80,24 +80,24 @@
       "name": "cas_invalide_materiau_trop_faible",
       "description": "Matage probable - matériau insuffisant",
       "request": {
-        "vis": {
+        "bolt": {
           "d": 12,
           "p": 1.75,
           "As": 84.3,
           "Re_min": 940,
           "quality_class": "10.9"
         },
-        "assemblage": {
+        "assembly": {
           "dh": 13,
           "do": 18.67,
           "Rc": 150,
           "mu_p_min": 0.15
         },
-        "sollicitations": {
+        "loads": {
           "FA_max": 10000,
           "Ft_max": 5000
         },
-        "serrage": {
+        "tightening": {
           "mu_tot_min": 0.12,
           "mu_tot_max": 0.18,
           "precision_class": "C20"
@@ -117,24 +117,24 @@
       "name": "cas_surface_appui_reduite",
       "description": "Surface d'appui réduite augmentant la pression",
       "request": {
-        "vis": {
+        "bolt": {
           "d": 10,
           "p": 1.5,
           "As": 58,
           "Re_min": 940,
           "quality_class": "10.9"
         },
-        "assemblage": {
+        "assembly": {
           "dh": 11,
           "do": 13.0,
           "Rc": 400,
           "mu_p_min": 0.15
         },
-        "sollicitations": {
+        "loads": {
           "FA_max": 5000,
           "Ft_max": 2000
         },
-        "serrage": {
+        "tightening": {
           "mu_tot_min": 0.12,
           "mu_tot_max": 0.18,
           "precision_class": "C20"

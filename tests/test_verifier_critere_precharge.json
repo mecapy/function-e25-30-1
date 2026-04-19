@@ -6,24 +6,24 @@
       "name": "cas_valide_avec_marge",
       "description": "Assemblage valide avec bonne marge de sécurité",
       "request": {
-        "vis": {
+        "bolt": {
           "d": 10,
           "p": 1.5,
           "As": 58,
           "Re_min": 940,
           "quality_class": "10.9"
         },
-        "assemblage": {
+        "assembly": {
           "dh": 11,
           "do": 14.63,
           "Rc": 400,
           "mu_p_min": 0.15
         },
-        "sollicitations": {
+        "loads": {
           "FA_max": 5000,
           "Ft_max": 2000
         },
-        "serrage": {
+        "tightening": {
           "mu_tot_min": 0.12,
           "mu_tot_max": 0.18,
           "precision_class": "C20"
@@ -43,24 +43,24 @@
       "name": "cas_limite_faible_marge",
       "description": "Assemblage à la limite avec faible marge",
       "request": {
-        "vis": {
+        "bolt": {
           "d": 8,
           "p": 1.25,
           "As": 36.6,
           "Re_min": 640,
           "quality_class": "8.8"
         },
-        "assemblage": {
+        "assembly": {
           "dh": 9,
           "do": 12.73,
           "Rc": 300,
           "mu_p_min": 0.15
         },
-        "sollicitations": {
+        "loads": {
           "FA_max": 6000,
           "Ft_max": 2500
         },
-        "serrage": {
+        "tightening": {
           "mu_tot_min": 0.12,
           "mu_tot_max": 0.18,
           "precision_class": "C20"
@@ -80,24 +80,24 @@
       "name": "cas_invalide_charges_excessives",
       "description": "Assemblage non valide - charges trop élevées",
       "request": {
-        "vis": {
+        "bolt": {
           "d": 6,
           "p": 1.0,
           "As": 20.1,
           "Re_min": 640,
           "quality_class": "8.8"
         },
-        "assemblage": {
+        "assembly": {
           "dh": 6.6,
           "do": 10.0,
           "Rc": 300,
           "mu_p_min": 0.15
         },
-        "sollicitations": {
+        "loads": {
           "FA_max": 8000,
           "Ft_max": 3000
         },
-        "serrage": {
+        "tightening": {
           "mu_tot_min": 0.12,
           "mu_tot_max": 0.18,
           "precision_class": "C20"
