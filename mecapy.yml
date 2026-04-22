@@ -1,11 +1,20 @@
 # MecaPy Package Manifest - NF E25-030-1
 # Pre-loaded bolted joints - Simplified approach
+#
+# Units used by this package (non-SI, consistent across the handler):
+#   lengths  : mm
+#   areas    : mm²
+#   forces   : N
+#   moments  : N·mm (tightening_torques convertit via *1e-3)
+#   stresses : MPa (N/mm²)
+# Les types canoniques ci-dessous reflètent le sens physique de chaque grandeur ;
+# la conversion en SI reste à la charge des consommateurs si nécessaire.
 
 name: e25-030-1
 description: Calculations for pre-loaded bolted joints per NF E25-030-1 (Simplified approach)
 author: MecaPy Team
 license: Copyright MecaPy
-version: 1.0.0
+version: 1.1.0
 
 tags:
   - assemblage-visse
@@ -21,34 +30,320 @@ functions:
   check:
     handler: handler.check
     description: Full verification of a bolted joint per NF E25-030-1 (all checks)
+    inputs:
+      bolt:
+        type:
+          d: Length
+          p: Length
+          As: Area
+          Re_min: Stress
+          quality_class: String
+        description: Bolt parameters (d, p in mm ; As in mm² ; Re_min in MPa)
+      assembly:
+        type:
+          dh: Length
+          do: Length
+          Rc: Stress
+          mu_p_min: Float
+        description: Joint parameters (dh, do in mm ; Rc in MPa ; mu_p_min dimensionless)
+      loads:
+        type:
+          FA_max: Force
+          Ft_max: Force
+        description: Applied loads (N)
+      tightening:
+        type:
+          mu_tot_min: Float
+          mu_tot_max: Float
+          precision_class: String
+        description: Tightening parameters (friction coefficients + tool precision class)
+    outputs:
+      valid:
+        type: Boolean
+        description: Overall validity (all sub-checks pass)
+      preload:
+        type:
+          valid: Boolean
+          F0_min: Force
+          F0_max: Force
+          margin: Force
+        description: Preload check result (F0^min <= F0^max)
+      bearing:
+        type:
+          valid: Boolean
+          sigma_p_max: Stress
+          Rc: Stress
+          margin: Stress
+        description: Bearing check under head/nut
+      stresses:
+        type:
+          sigma_b_max: Stress
+          tau_b_max: Stress
+          sigma_b_eq: Stress
+          sigma_adm: Stress
+          valid: Boolean
+          margin: Stress
+        description: Bolt stresses (tension, torsion, Von Mises)
+      torques:
+        type:
+          T_nominal: Moment
+          T_min: Moment
+          T_max: Moment
+        description: Tightening torques (nominal, min, max)
 
   # Preload calculations (Sections 5.2.3 and 5.2.4)
   min_preload:
     handler: handler.F0_min
     description: Minimum required preload F0^min (Section 5.2.3)
+    inputs:
+      bolt:
+        type:
+          d: Length
+          p: Length
+          As: Area
+          Re_min: Stress
+          quality_class: String
+        description: Bolt parameters (d, p in mm ; As in mm² ; Re_min in MPa)
+      assembly:
+        type:
+          dh: Length
+          do: Length
+          Rc: Stress
+          mu_p_min: Float
+        description: Joint parameters (dh, do in mm ; Rc in MPa ; mu_p_min dimensionless)
+      loads:
+        type:
+          FA_max: Force
+          Ft_max: Force
+        description: Applied loads (N)
+      tightening:
+        type:
+          mu_tot_min: Float
+          mu_tot_max: Float
+          precision_class: String
+        description: Tightening parameters (friction coefficients + tool precision class)
+    outputs:
+      # F0_min() returns a bare float, wrapped by the runtime as {"result": ...}
+      result:
+        type: Force
+        description: Minimum required preload F0^min (N)
 
   max_preload:
     handler: handler.F0_max
     description: Maximum allowable preload F0^max (Section 5.2.4)
+    inputs:
+      bolt:
+        type:
+          d: Length
+          p: Length
+          As: Area
+          Re_min: Stress
+          quality_class: String
+        description: Bolt parameters (d, p in mm ; As in mm² ; Re_min in MPa)
+      assembly:
+        type:
+          dh: Length
+          do: Length
+          Rc: Stress
+          mu_p_min: Float
+        description: Joint parameters (dh, do in mm ; Rc in MPa ; mu_p_min dimensionless)
+      loads:
+        type:
+          FA_max: Force
+          Ft_max: Force
+        description: Applied loads (N)
+      tightening:
+        type:
+          mu_tot_min: Float
+          mu_tot_max: Float
+          precision_class: String
+        description: Tightening parameters (friction coefficients + tool precision class)
+    outputs:
+      result:
+        type: Force
+        description: Maximum allowable preload F0^max (N)
 
   # Tightening torques (Annex C)
   tightening_torques:
     handler: handler.tightening_torques
     description: Tightening torques (nominal, min, max) per Annex C
+    inputs:
+      bolt:
+        type:
+          d: Length
+          p: Length
+          As: Area
+          Re_min: Stress
+          quality_class: String
+        description: Bolt parameters (d, p in mm ; As in mm² ; Re_min in MPa)
+      assembly:
+        type:
+          dh: Length
+          do: Length
+          Rc: Stress
+          mu_p_min: Float
+        description: Joint parameters (dh, do in mm ; Rc in MPa ; mu_p_min dimensionless)
+      loads:
+        type:
+          FA_max: Force
+          Ft_max: Force
+        description: Applied loads (N)
+      tightening:
+        type:
+          mu_tot_min: Float
+          mu_tot_max: Float
+          precision_class: String
+        description: Tightening parameters (friction coefficients + tool precision class)
+    outputs:
+      T_nominal:
+        type: Moment
+        description: Nominal tightening torque
+      T_min:
+        type: Moment
+        description: Minimum tightening torque (tool dispersion)
+      T_max:
+        type: Moment
+        description: Maximum tightening torque (tool dispersion)
 
   # Verifications (Sections 5.2.5 and 5.2.6)
   check_preload:
     handler: handler.check_preload
     description: Verification of criterion F0^min <= F0^max (Section 5.2.5)
+    inputs:
+      bolt:
+        type:
+          d: Length
+          p: Length
+          As: Area
+          Re_min: Stress
+          quality_class: String
+        description: Bolt parameters (d, p in mm ; As in mm² ; Re_min in MPa)
+      assembly:
+        type:
+          dh: Length
+          do: Length
+          Rc: Stress
+          mu_p_min: Float
+        description: Joint parameters (dh, do in mm ; Rc in MPa ; mu_p_min dimensionless)
+      loads:
+        type:
+          FA_max: Force
+          Ft_max: Force
+        description: Applied loads (N)
+      tightening:
+        type:
+          mu_tot_min: Float
+          mu_tot_max: Float
+          precision_class: String
+        description: Tightening parameters (friction coefficients + tool precision class)
+    outputs:
+      valid:
+        type: Boolean
+        description: True iff F0^min <= F0^max
+      F0_min:
+        type: Force
+        description: Minimum required preload
+      F0_max:
+        type: Force
+        description: Maximum allowable preload
+      margin:
+        type: Force
+        description: F0^max - F0^min
 
   check_bearing:
     handler: handler.check_bearing
     description: Verification of no bearing failure under head/nut (Section 5.2.6)
+    inputs:
+      bolt:
+        type:
+          d: Length
+          p: Length
+          As: Area
+          Re_min: Stress
+          quality_class: String
+        description: Bolt parameters (d, p in mm ; As in mm² ; Re_min in MPa)
+      assembly:
+        type:
+          dh: Length
+          do: Length
+          Rc: Stress
+          mu_p_min: Float
+        description: Joint parameters (dh, do in mm ; Rc in MPa ; mu_p_min dimensionless)
+      loads:
+        type:
+          FA_max: Force
+          Ft_max: Force
+        description: Applied loads (N)
+      tightening:
+        type:
+          mu_tot_min: Float
+          mu_tot_max: Float
+          precision_class: String
+        description: Tightening parameters (friction coefficients + tool precision class)
+    outputs:
+      valid:
+        type: Boolean
+        description: True iff sigma_p^max <= Rc
+      sigma_p_max:
+        type: Stress
+        description: Maximum bearing pressure under head/nut
+      Rc:
+        type: Stress
+        description: Bearing resistance of the clamped material
+      margin:
+        type: Stress
+        description: Rc - sigma_p^max
 
   # Stress calculations (Annex A)
   bolt_stresses:
     handler: handler.bolt_stresses
     description: Bolt stresses (tension, torsion, Von Mises) per Annex A
+    inputs:
+      bolt:
+        type:
+          d: Length
+          p: Length
+          As: Area
+          Re_min: Stress
+          quality_class: String
+        description: Bolt parameters (d, p in mm ; As in mm² ; Re_min in MPa)
+      assembly:
+        type:
+          dh: Length
+          do: Length
+          Rc: Stress
+          mu_p_min: Float
+        description: Joint parameters (dh, do in mm ; Rc in MPa ; mu_p_min dimensionless)
+      loads:
+        type:
+          FA_max: Force
+          Ft_max: Force
+        description: Applied loads (N)
+      tightening:
+        type:
+          mu_tot_min: Float
+          mu_tot_max: Float
+          precision_class: String
+        description: Tightening parameters (friction coefficients + tool precision class)
+    outputs:
+      sigma_b_max:
+        type: Stress
+        description: Maximum tensile stress
+      tau_b_max:
+        type: Stress
+        description: Maximum torsional shear stress
+      sigma_b_eq:
+        type: Stress
+        description: Equivalent Von Mises stress
+      sigma_adm:
+        type: Stress
+        description: Admissible stress (0.9 * Re_min)
+      valid:
+        type: Boolean
+        description: True iff sigma_b_eq <= sigma_adm
+      margin:
+        type: Stress
+        description: sigma_adm - sigma_b_eq
 
 # Normative reference
 norme:
