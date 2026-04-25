@@ -14,7 +14,7 @@ name: e25-030-1
 description: Calculations for pre-loaded bolted joints per NF E25-030-1 (Simplified approach)
 author: MecaPy Team
 license: Copyright MecaPy
-version: 1.1.0
+version: 1.1.1
 
 tags:
   - assemblage-visse
@@ -28,7 +28,7 @@ tags:
 functions:
   # Main function - Full verification
   check:
-    handler: handler.check
+    handler: handler:check
     description: Full verification of a bolted joint per NF E25-030-1 (all checks)
     inputs:
       bolt:
@@ -93,7 +93,7 @@ functions:
 
   # Preload calculations (Sections 5.2.3 and 5.2.4)
   min_preload:
-    handler: handler.F0_min
+    handler: handler:F0_min
     description: Minimum required preload F0^min (Section 5.2.3)
     inputs:
       bolt:
@@ -129,7 +129,7 @@ functions:
         description: Minimum required preload F0^min (N)
 
   max_preload:
-    handler: handler.F0_max
+    handler: handler:F0_max
     description: Maximum allowable preload F0^max (Section 5.2.4)
     inputs:
       bolt:
@@ -165,7 +165,7 @@ functions:
 
   # Tightening torques (Annex C)
   tightening_torques:
-    handler: handler.tightening_torques
+    handler: handler:tightening_torques
     description: Tightening torques (nominal, min, max) per Annex C
     inputs:
       bolt:
@@ -207,7 +207,7 @@ functions:
 
   # Verifications (Sections 5.2.5 and 5.2.6)
   check_preload:
-    handler: handler.check_preload
+    handler: handler:check_preload
     description: Verification of criterion F0^min <= F0^max (Section 5.2.5)
     inputs:
       bolt:
@@ -251,7 +251,7 @@ functions:
         description: F0^max - F0^min
 
   check_bearing:
-    handler: handler.check_bearing
+    handler: handler:check_bearing
     description: Verification of no bearing failure under head/nut (Section 5.2.6)
     inputs:
       bolt:
@@ -296,7 +296,7 @@ functions:
 
   # Stress calculations (Annex A)
   bolt_stresses:
-    handler: handler.bolt_stresses
+    handler: handler:bolt_stresses
     description: Bolt stresses (tension, torsion, Von Mises) per Annex A
     inputs:
       bolt:
