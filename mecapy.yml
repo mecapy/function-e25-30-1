@@ -1,4 +1,4 @@
-# MecaPy Package Manifest - NF E25-030-1
+# MecaPy Package Manifest - NF E25-030-1 (v1 format)
 # Pre-loaded bolted joints - Simplified approach
 #
 # Units used by this package (non-SI, consistent across the handler):
@@ -10,21 +10,28 @@
 # Les types canoniques ci-dessous reflètent le sens physique de chaque grandeur ;
 # la conversion en SI reste à la charge des consommateurs si nécessaire.
 
-name: e25-030-1
-description: Calculations for pre-loaded bolted joints per NF E25-030-1 (Simplified approach)
-author: MecaPy Team
-license: Copyright MecaPy
-version: 1.1.1
+version: "1"
 
-tags:
-  - assemblage-visse
-  - precontrainte
-  - norme-francaise
-  - NF-E25-030-1
-  - mecanique
-  - boulonnerie
+package:
+  name: e25-030-1
+  description: Calculations for pre-loaded bolted joints per NF E25-030-1 (Simplified approach)
+  version: 2.0.0
+  author: MecaPy Team
+  license: Copyright MecaPy
+  visibility: public
+  tags:
+    - assemblage-visse
+    - precontrainte
+    - norme-francaise
+    - NF-E25-030-1
+    - mecanique
+    - boulonnerie
 
-# Exposed functions
+runtime:
+  kind: python
+  version: "3.12"
+  requirements: false
+
 functions:
   # Main function - Full verification
   check:
@@ -345,19 +352,14 @@ functions:
         type: Stress
         description: sigma_adm - sigma_b_eq
 
-# Normative reference
+# Normative reference (informational — ignored by the parser)
 norme:
   reference: NF E25-030-1
   titre: Bolted assemblies with ISO metric threading - Design rules for pre-loaded assemblies - Simplified approach
   date: August 2014
   organisme: AFNOR
 
-# Runtime configuration
-runtime:
-  python: "3.12"
-  timeout: 300
-
-# Tests
+# Tests (informational — ignored by the parser)
 tests:
   framework: pytest
   min_coverage: 80
